@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  uuid       String   @id @default(uuid())
+  google_id  String?
+  nama       String
+  email      String   @unique
+  password   String?
+  onboarding Boolean  @default(false)
+  photo_url  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+model TouristPlace {
+  uuid        String   @id @default(uuid())
+  name        String
+  description String?
+  latitude    String?
+  longitude   String?
+  address     String?
+  photo_url   String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  categories  TouristPlaceCategory[]
+  images      TouristImage[]
+
+  @@map("tourist_places")
+}
+
+model TouristCategory {
+  uuid String @id @default(uuid())
+  nama String
+
+  places TouristPlaceCategory[]
+
+  @@map("tourist_categories")
+}
+
+model TouristPlaceCategory {
+  tourist_place_id String
+  category_id      String
+
+  place    TouristPlace    @relation(fields: [tourist_place_id], references: [uuid], onDelete: Cascade)
+  category TouristCategory @relation(fields: [category_id], references: [uuid], onDelete: Cascade)
+
+  @@id([tourist_place_id, category_id])
+  @@map("tourist_place_categories")
+}
+
+model TouristImage {
+  uuid             String @id @default(uuid())
+  tourist_place_id String
+  image_url        String
+
+  place TouristPlace @relation(fields: [tourist_place_id], references: [uuid], onDelete: Cascade)
+
+  @@map("tourist_images")
+}
