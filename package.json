@@ -1,5 +1,5 @@
 {
-  "name": "back-end",
+  "name": "Travirasa-BE",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -21,10 +21,14 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/typeorm": "^11.0.3",
+    "pg": "^8.22.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -67,5 +71,14 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "allowScripts": {
+    "@nestjs/typeorm@11.0.3": true,
+    "typeorm@1.0.0": true,
+    "pg@8.22.0": true,
+    "@nestjs/config@4.0.4": true,
+    "@types/jest@30.0.0": true,
+    "@types/mocha@10.0.10": true,
+    "unrs-resolver@1.12.2": true
   }
 }
